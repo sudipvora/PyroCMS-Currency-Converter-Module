@@ -1,7 +1,6 @@
 <?php namespace Rcrowt\CurrencyxModule\ExchangeRate;
 
 use Rcrowt\CurrencyxModule\ExchangeRate\Api\ApiAdapterInterface;
-use Rcrowt\CurrencyxModule\ExchangeRate\Api\ApiInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
@@ -13,13 +12,11 @@ class ExchangeRateCollection extends \ArrayIterator {
 
 	/**
 	 * Currencyx_Rate_Collection constructor.
-	 * @param ApiInterface $api
 	 * @param ApiAdapterInterface $adapter
 	 * @internal param array $rates
 	 */
-	public function __construct(ApiInterface $api, ApiAdapterInterface $adapter) {
-
-		$this->items = $adapter->createExchangeRateArray($api);
+	public function __construct(ApiAdapterInterface $adapter) {
+		$this->items = $adapter->getExchangeRates();
 	}
 
 	/**

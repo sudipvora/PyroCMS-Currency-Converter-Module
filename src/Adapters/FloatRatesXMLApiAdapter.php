@@ -1,21 +1,34 @@
 <?php namespace Rcrowt\CurrencyxModule\Adapters;
 
 use Rcrowt\CurrencyxModule\ExchangeRate\Api\ApiAdapterInterface;
-use Rcrowt\CurrencyxModule\ExchangeRate\Api\ApiInterface;
 use Rcrowt\CurrencyxModule\ExchangeRate\ExchangeRate;
+use Rcrowt\CurrencyxModule\FloatRates\FloatRatesXMLApi;
 use SimpleXMLElement;
 
 class FloatRatesXMLApiAdapter implements ApiAdapterInterface {
 
 	/**
+	 * @var FloatRatesXMLApi
+	 */
+	protected $api;
+
+	/**
+	 * FloatRatesXMLApiAdapter constructor.
+	 * @param FloatRatesXMLApi $api
+	 */
+	public function __construct(FloatRatesXMLApi $api) {
+		$this->api = $api;
+	}
+
+
+	/**
 	 * Convert the API Response to ExchangeRate Instances.
-	 * @param ApiInterface $api
 	 * @return array|ExchangeRate[]
 	 */
-	public function createExchangeRateArray(ApiInterface $api) {
+	public function getExchangeRates() {
 		$items = [];
 
-		foreach ($api->all() as $x) {
+		foreach ($this->api->all() as $x) {
 
 			// Create an instance for the base rate.
 			if (!$items) {
@@ -33,7 +46,7 @@ class FloatRatesXMLApiAdapter implements ApiAdapterInterface {
 	 * @param SimpleXMLElement $xml
 	 * @return ExchangeRate
 	 */
-	public function createExchangeRate(SimpleXMLElement $xml) {
+	protected function createExchangeRate(SimpleXMLElement $xml) {
 		$rate = new ExchangeRate();
 		$rate->setBaseCurrency((string)$xml->baseCurrency);
 		$rate->setBaseName((string)$xml->baseName);
@@ -49,7 +62,7 @@ class FloatRatesXMLApiAdapter implements ApiAdapterInterface {
 	 * @param SimpleXMLElement $xml
 	 * @return ExchangeRate
 	 */
-	public function createExchangeRateForBase(SimpleXMLElement $xml) {
+	protected function createExchangeRateForBase(SimpleXMLElement $xml) {
 		$rate = new ExchangeRate();
 		$rate->setBaseCurrency((string)$xml->baseCurrency);
 		$rate->setBaseName((string)$xml->baseName);

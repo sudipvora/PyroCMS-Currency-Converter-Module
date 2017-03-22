@@ -9,9 +9,8 @@ interface ApiAdapterInterface {
 
 	/**
 	 * Convert an API Response to ExchangeRate Instances.
-	 * @param ApiInterface $api
 	 * @return array|ExchangeRate[]
 	 */
-	public function createExchangeRateArray(ApiInterface $api);
+	public function getExchangeRates();
 
 }

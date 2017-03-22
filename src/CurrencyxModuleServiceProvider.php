@@ -4,9 +4,6 @@ use Anomaly\Streams\Platform\Addon\AddonServiceProvider;
 use Rcrowt\CurrencyxModule\Adapters\FloatRatesJSONApiAdapter;
 use Rcrowt\CurrencyxModule\Adapters\FloatRatesXMLApiAdapter;
 use Rcrowt\CurrencyxModule\ExchangeRate\Api\ApiAdapterInterface;
-use Rcrowt\CurrencyxModule\ExchangeRate\Api\ApiInterface;
-use Rcrowt\CurrencyxModule\FloatRates\FloatRatesJSONApi;
-use Rcrowt\CurrencyxModule\FloatRates\FloatRatesXMLApi;
 
 class CurrencyxModuleServiceProvider extends AddonServiceProvider {
 
@@ -37,11 +34,9 @@ class CurrencyxModuleServiceProvider extends AddonServiceProvider {
 		 */
 
 		// Defines the API Source and Adapter used to load the Exchange Rates. (XML)
-		ApiInterface::class => FloatRatesXMLApi::class,
 		ApiAdapterInterface::class => FloatRatesXMLApiAdapter::class,
 
 		// Defines the API Source and Adapter used to load the Exchange Rates. (JSON)
-//		ApiInterface::class => FloatRatesJSONApi::class,
 //		ApiAdapterInterface::class => FloatRatesJSONApiAdapter::class,
 	];
 
