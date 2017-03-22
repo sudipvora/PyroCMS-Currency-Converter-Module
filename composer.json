@@ -1,0 +1,9 @@
+{
+    "name": "rcrowt/currencyx",
+    "type": "streams-addon",
+    "autoload": {
+        "psr-4": {
+            "Rcrowt\\CurrencyxModule\\": "src/"
+        }
+    }
+}

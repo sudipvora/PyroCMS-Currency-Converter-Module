@@ -1,10 +1,10 @@
-<?php
+<?php namespace Rcrowt\CurrencyxModule\ExchangeRate;
 
 /**
  * Exchange Rate DAO.
  * Class Currencyx_Rate
  */
-class Currencyx_Rate {
+class ExchangeRate {
 
 	/**
 	 * @var string Base currency 3 character ISO-4217 Code.
@@ -96,11 +96,11 @@ class Currencyx_Rate {
 
 	/**
 	 *
-	 * @param Currencyx_Rate $rate Currency to convert to.
+	 * @param ExchangeRate $rate Currency to convert to.
 	 * @param float|integer $amount Source currency amount (default: 1)
 	 * @return float
 	 */
-	public function getRateForCurrency(Currencyx_Rate $rate, $amount = 1) {
+	public function getRateForCurrency(ExchangeRate $rate, $amount = 1) {
 		return ($this->getRate() / $rate->getRate()) * $amount;
 	}
 
@@ -109,5 +109,13 @@ class Currencyx_Rate {
 	 */
 	public function setRate($rate) {
 		$this->rate = (float)$rate;
+	}
+
+	/**
+	 * Cast the unique key as a string for use in views.
+	 * @return string
+	 */
+	public function __toString() {
+		return strtolower($this->target_currency);
 	}
 }
